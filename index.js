@@ -14,6 +14,7 @@ function divide(a, b){
     return a / b;
 }
 
+Math.eval
 let preNum  = null;
 
 let currentNum = null;
@@ -32,3 +33,4 @@ function operate(num1, num2, op){
     }
 }
 
+xpath
