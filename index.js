@@ -14,7 +14,7 @@ function divide(a, b){
     return a / b;
 }
 
-Math.eval
+
 let preNum  = null;
 
 let currentNum = null;
@@ -33,4 +33,23 @@ function operate(num1, num2, op){
     }
 }
 
-xpath
+const con = document.querySelector(".con");
+const display = document.querySelector(".display > h1");
+const numberButtons = document.querySelectorAll(".number");
+
+let displayArray = [];
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if(display.textContent.length < 9){
+            text = button.textContent;
+        displayArray.push(text);
+        let num = displayArray.join("");
+        display.textContent = num;
+        };
+    });
+});
+
+
+
+
