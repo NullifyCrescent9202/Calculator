@@ -40,7 +40,7 @@ button{
 
 .row-left, .row-center, .row-right, .operator-buttons{
 
-    
+
     gap: 2px;
     width: 50px;
     display: flex;
