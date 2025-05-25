@@ -44,42 +44,84 @@ const decimal = document.querySelector("#decimal");
 let displayArray = [];
 
 let data = [];
-let x = false;
+let num;
+let a;
+let b;
+let boolNegative = false;
 
+function negativeDisplay(){
+    if(boolNegative == true){
+        num = -Math.abs(num);
+        console.log(negative);
+        return num;
+    } else{
+        return num;
+    }
+}
 
 decimal.addEventListener("click", () =>{
     if(display.textContent.length < 9){
         text = ".";
          if(displayArray.includes(".")){
-                let x = true;
-                console.log("true");
              } else{
                 displayArray.push(".");
-                let num = displayArray.join("");
+                num = displayArray.join("");
                 display.textContent = num;
-                console.log(displayArray);
-                let x = true;
              };
     };
 });
-
 
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
          console.log(displayArray)
             if(display.textContent.length < 9){
-
             text = button.textContent;
              displayArray.push(text);
-             let num = displayArray.join("");
-             display.textContent = num;
-             console.log(displayArray);
+             num = displayArray.join("");
 
-            }
+             console.log(num);
+             display.textContent = negativeDisplay();
+             console.log(displayArray);
+             console.log(num);
+            };
     });
 });
 
+const multiplyButton = document.querySelector("#multiply");
+const divideButton = document.querySelector("#divide");
+const subtractButton = document.querySelector("#subtract");
+const addButton = document.querySelector("#add");
+const sumButton = document.querySelector("#sum");
+const negativeButton = document.querySelector("#negative");
+
+negativeButton.addEventListener("click", () =>{
+    if(boolNegative == false){
+        num = -Math.abs(num);
+        display.textContent = num;
+        boolNegative = true;
+    } else if(bool == true){
+        num = Math.abs(num);
+        display.textContent = num;
+        boolNegative = false;
+    };
+});
+
+const percentButton = document.querySelector("#percent");
+percentButton.addEventListener("click", ()=>{
+    console.log("hello");
+    let n = num / 100;
+    num = n;
+    if(n > 1){
+        num = 0; 
+        display.textContent = num;
+    } else if(n == 0){
+            num = 0;
+            display.textContent = num;
+        } else{
+            display.textContent = num.toFixed(5);
+        }
+});
 
 
-
+const clearButton = document.querySelector("#clear")
