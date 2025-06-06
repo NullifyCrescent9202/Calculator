@@ -1,4 +1,4 @@
-function add(a, b){
+ function add(a, b){
     return a + b;
 }
 
@@ -23,6 +23,7 @@ let preNum  = null;
 let currentNum = null;
 
 let operand = ["1o", "2o", "3o", "4o"] 
+let opArray = [];
 
 function operate(num1, num2, op){
     if(op === "1o"){
@@ -42,12 +43,17 @@ const numberButtons = document.querySelectorAll(".number");
 const decimal = document.querySelector("#decimal");
 
 let displayArray = [];
-
+let numArray = [];
+let sum;
 let data = [];
 let num;
 let a;
-let b;
 let boolNegative = false;
+let opPressed = false;
+let opp = [];
+sumPress = false;
+
+let currentOp;
 
 function negativeDisplay(){
     if(boolNegative == true){
@@ -69,38 +75,158 @@ decimal.addEventListener("click", () =>{
                 display.textContent = num;
              };
     };
+    
 });
 
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-         console.log(displayArray)
             if(display.textContent.length < 9){
             text = button.textContent;
              displayArray.push(text);
              num = displayArray.join("");
-
-             console.log(num);
              display.textContent = negativeDisplay();
-             console.log(displayArray);
-             console.log(num);
             };
     });
 });
 
-const multiplyButton = document.querySelector("#multiply");
-const divideButton = document.querySelector("#divide");
-const subtractButton = document.querySelector("#subtract");
-const addButton = document.querySelector("#add");
-const sumButton = document.querySelector("#sum");
-const negativeButton = document.querySelector("#negative");
+function symbol(sym){
+    display.textContent = sym;
+};
 
+function delegateOPS(){
+
+
+};
+
+const multiplyButton = document.querySelector("#multiply");
+multiplyButton.addEventListener("click", ()=>{
+    currentOp = "3o";
+
+        symbol("*");
+    if(true){
+    numArray.push(Number(num));
+    displayArray = [];
+    };
+
+    if(numArray.length == 2){
+        symbol("*")
+        sum = operate(numArray[0], numArray[1], "3o");
+        numArray = [];
+        numArray.push(Number(sum));
+        num = null;
+        numArray.pop;
+        display.textContent = sum;
+        sum = null
+    };
+
+});
+
+const divideButton = document.querySelector("#divide");
+divideButton.addEventListener("click", ()=>{
+        currentOp = "4o";
+
+    symbol("/");
+    if(true){
+    numArray.push(Number(num));
+    displayArray = [];
+    };
+
+    if(numArray.length == 2){
+        symbol("/")
+        sum = operate(numArray[0], numArray[1], "4o");
+        numArray = [];
+        numArray.push(Number(sum));
+        num = null;
+        numArray.pop;
+        display.textContent = sum;
+        sum = null
+    };
+});
+
+const subtractButton = document.querySelector("#subtract");
+subtractButton.addEventListener("click",() =>{
+    currentOp = "2o";
+
+    symbol("-");
+    if(true){
+    numArray.push(Number(num));
+    displayArray = [];
+    };
+
+    if(numArray.length == 2){
+        symbol("-")
+        sum = operate(numArray[0], numArray[1], "2o");
+        numArray = [];
+        numArray.push(Number(sum));
+        num = null;
+        numArray.pop;
+        display.textContent = sum;
+        sum = null
+    };
+
+})
+
+const addButton = document.querySelector("#add");
+addButton.addEventListener("click", () => {
+    currentOp = "1o";
+
+    if(opArray.length == 2){
+
+    } else opArray.push("1o")
+
+    symbol("+");
+    if(true){
+    numArray.push(Number(num));
+    displayArray = [];
+    };
+
+    if(numArray.length == 2){
+        symbol("+")
+        sum = operate(numArray[0], numArray[1], "1o");
+        numArray = [];
+        numArray.push(Number(sum));
+        num = null;
+        numArray.pop;
+        display.textContent = sum;
+        sum = null
+    };
+
+});
+
+const sumButton = document.querySelector("#sum");
+sumButton.addEventListener("click", ()=>{
+    if(numArray.length == 0){
+    } else if(sumPress == false){
+        numArray.push(Number(num));
+        if(opArray.length == 2){
+            opArray.push();
+        } else{
+        sum = operate(numArray[0], numArray[1], currentOp);};
+        currentNum = Number(sum);
+        numArray = [];
+        numArray.push(Number(sum));
+        num = null;
+        display.textContent = sum;
+        displayArray = [];
+
+
+    };
+
+    //console.log("------SUM------")
+    //console.log(displayArray + " Display array");
+   // console.log(display.textContent + " text Content");
+    //console.log(numArray + " numArray");
+    //console.log("------SUM------")
+});
+
+const negativeButton = document.querySelector("#negative");
 negativeButton.addEventListener("click", () =>{
     if(boolNegative == false){
         num = -Math.abs(num);
         display.textContent = num;
         boolNegative = true;
-    } else if(bool == true){
+    } else {
         num = Math.abs(num);
         display.textContent = num;
         boolNegative = false;
@@ -123,5 +249,11 @@ percentButton.addEventListener("click", ()=>{
         }
 });
 
-
 const clearButton = document.querySelector("#clear")
+clearButton.addEventListener("click", ()=>{
+    numArray = [];
+    displayArray = [];
+    sum = null;
+    display.textContent = "";
+    opPressed = false;
+})
