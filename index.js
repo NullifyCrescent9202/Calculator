@@ -94,124 +94,149 @@ function symbol(sym){
     display.textContent = sym;
 };
 
-function delegateOPS(){
-
-
-};
 
 const multiplyButton = document.querySelector("#multiply");
 multiplyButton.addEventListener("click", ()=>{
-    currentOp = "3o";
+    if(opArray.length == 2){
 
-        symbol("*");
-    if(true){
+    } else{
+         opArray.push("3o")
+         console.log("pushing");
+        };
+
+    symbol("*");
+    if(sumPress == false){
     numArray.push(Number(num));
+    console.log("else");
     displayArray = [];
     };
 
     if(numArray.length == 2){
-        symbol("*")
-        sum = operate(numArray[0], numArray[1], "3o");
-        numArray = [];
-        numArray.push(Number(sum));
-        num = null;
-        numArray.pop;
-        display.textContent = sum;
-        sum = null
+        delegateOPS("*", "3o");
+       opArray.shift();
     };
 
 });
 
 const divideButton = document.querySelector("#divide");
 divideButton.addEventListener("click", ()=>{
-        currentOp = "4o";
+    if(opArray.length == 2){
+
+    } else{
+         opArray.push("4o")
+         console.log("pushing");
+        };
 
     symbol("/");
-    if(true){
+    if(sumPress == false){
     numArray.push(Number(num));
+    console.log("else");
     displayArray = [];
     };
 
     if(numArray.length == 2){
-        symbol("/")
-        sum = operate(numArray[0], numArray[1], "4o");
-        numArray = [];
-        numArray.push(Number(sum));
-        num = null;
-        numArray.pop;
-        display.textContent = sum;
-        sum = null
+        delegateOPS("/", "4o");
+       opArray.shift();
     };
+
 });
 
 const subtractButton = document.querySelector("#subtract");
 subtractButton.addEventListener("click",() =>{
-    currentOp = "2o";
+    if(opArray.length == 2){
+
+    } else{
+         opArray.push("2o")
+         console.log("pushing");
+        };
 
     symbol("-");
-    if(true){
+    if(sumPress == false){
     numArray.push(Number(num));
+    console.log("else");
     displayArray = [];
     };
 
     if(numArray.length == 2){
-        symbol("-")
-        sum = operate(numArray[0], numArray[1], "2o");
-        numArray = [];
-        numArray.push(Number(sum));
-        num = null;
-        numArray.pop;
-        display.textContent = sum;
-        sum = null
+        delegateOPS("-", "2o");
+       opArray.shift();
     };
 
 })
 
 const addButton = document.querySelector("#add");
 addButton.addEventListener("click", () => {
-    currentOp = "1o";
-
     if(opArray.length == 2){
 
-    } else opArray.push("1o")
+    } else{
+         opArray.push("1o")
+         console.log("pushing");
+        };
 
     symbol("+");
-    if(true){
+    if(sumPress == false){
     numArray.push(Number(num));
+    console.log("else");
     displayArray = [];
     };
 
     if(numArray.length == 2){
-        symbol("+")
-        sum = operate(numArray[0], numArray[1], "1o");
-        numArray = [];
-        numArray.push(Number(sum));
-        num = null;
-        numArray.pop;
-        display.textContent = sum;
-        sum = null
+        delegateOPS("+", "1o");
+       opArray.shift();
     };
 
 });
 
+function delegateOPS(sym, baseOp,){
+    console.log(currentNum, num, sum, numArray, opArray, display.textContent);
+        sum = operate(numArray[0], numArray[1], opArray[0]);
+        numArray = [];
+        numArray.push(Number(sum));
+        currentNum = Number(num);
+        num = null;
+        numArray.pop;
+        display.textContent = sum;
+        sum = null;
+        console.log(currentNum, num, sum, numArray, opArray, display.textContent);
+};
+
 const sumButton = document.querySelector("#sum");
 sumButton.addEventListener("click", ()=>{
+    console.log(currentNum, num, sum, numArray, opArray, display.textContent);
     if(numArray.length == 0){
-    } else if(sumPress == false){
-        numArray.push(Number(num));
-        if(opArray.length == 2){
-            opArray.push();
+        if(sumPress == true){
+
+            sumPress = false;
+        }
+    } else if(opArray.length == 2){
+            numArray.push(Number(num));
+
+            opArray.pop();
+            sum = operate(numArray[0], numArray[1], opArray[0]);
+            currentNum = Number(sum);
+            numArray = [];
+            numArray.push(Number(sum));
+            num = null;
+            display.textContent = sum;
+            displayArray = [];
+            opArray = []
         } else{
-        sum = operate(numArray[0], numArray[1], currentOp);};
+        numArray.push(Number(num));
+
+        sum = operate(numArray[0], numArray[1], opArray[0]);
         currentNum = Number(sum);
         numArray = [];
         numArray.push(Number(sum));
         num = null;
         display.textContent = sum;
         displayArray = [];
+        opArray = [];
+        };
+        sumPress = true;
+        console.log(sumPress);
 
 
-    };
+    
 
     //console.log("------SUM------")
     //console.log(displayArray + " Display array");
